@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #9c88b9; /* Azul vibrante */
+    --secondary-color: #2ecc71; /* Verde para sucesso/receita */
+    --danger-color: #e74c3c; /* Vermelho para despesa/perigo */
+    --background-light: #f4f7f6;
+    --card-background: #ffffff;
+    --text-color-dark: #333;
+    --text-color-light: #f8f8f8;
+    --border-color: #e0e0e0;
+    --sidebar-bg: #2c3e50; /* Azul escuro para sidebar */
+    --sidebar-text: #ecf0f1;
+    --hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Reset CSS Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    /* ... outras propriedades existentes do body ... */
+
+    background-image: url('lucas.jpg.png'); /* <<<<< ALtere 'lucas.jpg para o nome EXATO do seu arquivo de imagem */
+    background-size:100%; /* Faz a imagem cobrir todo o espaço, cortando se necessário */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-position: center center; /* Centraliza a imagem na tela */
+    background-attachment: fixed; /* Opcional: Faz a imagem permanecer fixa ao rolar a página */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    /* REMOVIDO: display: flex; e overflow-x: hidden; daqui */
+}
+
+.container {
+    display: flex; /* MOVVIDO PARA CÁ: Essencial para o layout do dashboard */
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden; /* MOVVIDO PARA CÁ: Controla overflow horizontal do dashboard */
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: var(--text-color-light);
+}
+
+.sidebar .logo i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul li a {
+    color: var(--sidebar-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li.active a {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+/* --- Main Content --- */
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px 25px; /* Mais compacto no topo e fundo */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-background);
+    padding: 10px 20px; /* Mais compacto */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 10px; /* Mais compacto */
+    flex-shrink: 0;
+}
+
+.topbar h2 {
+    color: var(--text-color-dark);
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.user-profile i {
+    margin-left: 8px;
+    font-size: 1.4em;
+    color: var(--primary-color);
+}
+
+/* --- Cards Gerais --- */
+.card {
+    background-color: var(--card-background);
+    padding: 18px; /* Mais compacto */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 12px; /* Mais compacto */
+}
+
+/* --- Dashboard Section --- */
+.dashboard-section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px; /* Mais compacto */
+    margin-bottom: 12px; /* Mais compacto */
+}
+
+.summary-card {
+    text-align: center;
+    padding: 18px; /* Mais compacto */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+}
+
+.summary-card .icon {
+    font-size: 1.8em;
+    margin-bottom: 8px;
+}
+
+.summary-card p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.summary-card .amount {
+    font-size: 1.6em;
+    font-weight: 700;
+}
+
+.balance-card .icon { color: var(--primary-color); }
+.balance-card .amount { color: var(--primary-color); }
+
+.income-card .icon { color: var(--secondary-color); }
+.income-card .amount { color: var(--secondary-color); }
+
+.expense-card .icon { color: var(--danger-color); }
+.expense-card .amount { color: var(--danger-color); }
+
+/* --- Estilo para o Card de Investimento no Dashboard --- */
+.investment-card .icon {
+    color: #f39c12; /* Laranja para investimento */
+}
+.investment-card .amount {
+    color: #f39c12; /* Laranja para investimento */
+}
+
+
+.chart-section {
+    padding: 20px; /* Mais compacto */
+    flex-grow: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-section h3 {
+    font-size: 1.3em;
+    margin-bottom: 12px;
+    color: var(--text-color-dark);
+}
+
+/* Limitar a altura do canvas do gráfico */
+#financialChart {
+    max-height: 280px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+
+/* --- Transações Section --- */
+.transactions-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px; /* Mais compacto */
+}
+
+@media (min-width: 992px) {
+    .transactions-section {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+
+.add-transaction-card h3,
+.transaction-list-card h3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: var(--text-color-dark);
+}
+
+.add-transaction-card h3 i,
+.transaction-list-card h3 i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+/* --- Estilo para a Seção de Investimentos --- */
+.investments-section {
+    display: grid;
+    grid-template-columns: 1fr; /* Em telas menores, uma coluna */
+    gap: 15px; /* Manter o mesmo gap das transações */
+}
+
+@media (min-width: 992px) {
+    .investments-section {
+        grid-template-columns: 1fr 2fr; /* Em telas maiores, formulário e lista */
+    }
+}
+
+.add-investment-card h3,
+.investment-list-card h3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: var(--text-color-dark);
+}
+
+.add-investment-card h3 i,
+.investment-list-card h3 i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+
+/* Formulário (geral) */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95em;
+    color: var(--text-color-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Tabela de Transações e Investimentos (geral) */
+.transaction-table,
+.investment-table { /* Aplicado a ambas as tabelas */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.transaction-table th,
+.transaction-table td,
+.investment-table th,
+.investment-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.transaction-table th,
+.investment-table th {
+    background-color: #f8f8f8;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.transaction-table tbody tr:hover,
+.investment-table tbody tr:hover {
+    background-color: #fbfbfb;
+}
+
+.transaction-table .type-receita {
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+.transaction-table .type-despesa {
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+.action-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 6px;
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.action-buttons button:hover {
+    color: var(--primary-color);
+}
+
+.action-buttons .btn-delete {
+    color: var(--danger-color);
+}
+
+.action-buttons .btn-delete:hover {
+    color: #c0392b;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        padding: 10px 5px;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 5px;
+    }
+
+    .sidebar nav ul li a {
+        padding: 6px 3px;
+        font-size: 0.75em;
+    }
+
+    .main-content {
+        padding: 10px 15px;
+        padding-bottom: 70px; /* Espaço para a sidebar fixa inferior */
+    }
+
+    .topbar {
+        padding: 8px 12px;
+        margin-bottom: 8px;
+    }
+
+    .topbar h2 {
+        margin-bottom: 5px;
+        font-size: 1.2em;
+    }
+
+    .user-profile {
+        font-size: 0.85em;
+    }
+
+    .summary-cards {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .card {
+        padding: 12px;
+        margin-bottom: 8px;
+    }
+
+    .summary-card {
+        padding: 12px;
+    }
+
+    .summary-card .icon {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .summary-card p {
+        font-size: 0.8em;
+        margin-bottom: 3px;
+    }
+
+    .summary-card .amount {
+        font-size: 1.4em;
+    }
+
+    .chart-section {
+        padding: 15px;
+    }
+
+    .chart-section h3 {
+        font-size: 1.1em;
+        margin-bottom: 8px;
+    }
+
+    #financialChart {
+        max-height: 200px; /* Limite de altura menor para mobile */
+    }
+
+    .transactions-section,
+    .investments-section { /* Ambos têm o mesmo layout responsivo */
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .add-transaction-card h3,
+    .transaction-list-card h3,
+    .add-investment-card h3,
+    .investment-list-card h3 {
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        margin-bottom: 4px;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .transaction-table th,
+    .transaction-table td,
+    .investment-table th,
+    .investment-table td {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+}

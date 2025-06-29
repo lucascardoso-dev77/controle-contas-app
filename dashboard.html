@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro Moderno</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <span>Finanças</span>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#transacoes"><i class="fas fa-exchange-alt"></i> Transações</a></li>
+                    <li><a href="#investimentos"><i class="fas fa-chart-line"></i> Investimentos</a></li>
+                    <li><a href="#relatorios"><i class="fas fa-chart-pie"></i> Relatórios</a></li>
+                    <li><a href="#configuracoes"><i class="fas fa-cog"></i> Configurações</a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h2>Dashboard</h2>
+                <div class="user-profile">
+                    Olá, <span id="current-username">Usuário</span>!
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+
+            <section id="dashboard" class="dashboard-section">
+                <div class="summary-cards">
+                    <div class="card summary-card balance-card">
+                        <i class="fas fa-dollar-sign icon"></i>
+                        <p>Saldo Atual</p>
+                        <span id="saldo" class="amount">R$ 0,00</span>
+                    </div>
+                    <div class="card summary-card income-card">
+                        <i class="fas fa-arrow-alt-circle-up icon"></i>
+                        <p>Receitas Totais</p>
+                        <span id="receitas-totais" class="amount">R$ 0,00</span>
+                    </div>
+                    <div class="card summary-card expense-card">
+                        <i class="fas fa-arrow-alt-circle-down icon"></i>
+                        <p>Despesas Totais</p>
+                        <span id="despesas-totais" class="amount">R$ 0,00</span>
+                    </div>
+                    <div class="card summary-card investment-card">
+                        <i class="fas fa-piggy-bank icon"></i>
+                        <p>Total Investido</p>
+                        <span id="total-investido" class="amount">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="chart-section card">
+                    <h3>Visão Geral Financeira</h3>
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </section>
+
+            <section id="transacoes" class="transactions-section" style="display:none;">
+                <div class="card add-transaction-card">
+                    <h3><i class="fas fa-plus-circle"></i> Nova Transação</h3>
+                    <form id="form-transacao">
+                        <div class="form-group">
+                            <label for="descricao">Descrição</label>
+                            <input type="text" id="descricao" placeholder="Ex: Aluguel, Salário" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="valor">Valor</label>
+                            <input type="number" id="valor" step="0.01" placeholder="Ex: 1500.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo">Tipo</label>
+                            <select id="tipo">
+                                <option value="receita">Receita</option>
+                                <option value="despesa">Despesa</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="categoria-group" style="display: none;">
+                            <label for="categoria">Categoria</label>
+                            <input type="text" id="categoria" placeholder="Ex: Casa, Alimentação">
+                        </div>
+                        <div class="form-group" id="parcelamento-campos" style="display: none;">
+                            <label for="parcelas">Número de Parcelas</label>
+                            <input type="number" id="parcelas" min="1" value="1">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar Transação</button>
+                    </form>
+                </div>
+
+                <div class="card transaction-list-card">
+                    <h3><i class="fas fa-list-ul"></i> Minhas Transações</h3>
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Tipo</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th>Parcelamento</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transacoes-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="investimentos" class="investments-section" style="display:none;">
+                <div class="card add-investment-card">
+                    <h3><i class="fas fa-hand-holding-usd"></i> Adicionar Investimento</h3>
+                    <form id="form-investimento">
+                        <div class="form-group">
+                            <label for="invest-descricao">Descrição do Investimento</label>
+                            <input type="text" id="invest-descricao" placeholder="Ex: Poupança, CDB" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="invest-valor">Valor Investido</label>
+                            <input type="number" id="invest-valor" step="0.01" placeholder="Ex: 5000.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="invest-data">Data do Investimento</label>
+                            <input type="date" id="invest-data" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar Investimento</button>
+                    </form>
+                </div>
+
+                <div class="card investment-list-card">
+                    <h3><i class="fas fa-money-bill-wave"></i> Meus Investimentos</h3>
+                    <table class="investment-table">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="investimentos-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="relatorios" style="display:none;">
+                <h2>Relatórios</h2>
+                <p>Em breve, gráficos e análises detalhadas!</p>
+            </section>
+            <section id="configuracoes" style="display:none;">
+                <h2>Configurações</h2>
+                <p>Ajustes da sua conta e preferências.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

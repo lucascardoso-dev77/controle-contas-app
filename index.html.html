@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Controle Financeiro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ESTILOS ESPECÍFICOS DA TELA DE LOGIN */
+        body {
+            margin: 0; /* Garante que não há margem padrão no body */
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light); /* Cor de fundo de fallback */
+            color: var(--text-color-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Evita barras de rolagem */
+        }
+
+        .login-background {
+            position: fixed; /* Fixa a imagem de fundo */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('http://googleusercontent.com/image_generation_content/1'); /* Imagem de fundo gerada */
+            background-size: cover; /* Cobre todo o elemento */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Não repete */
+            filter: brightness(0.6); /* Escurece a imagem para o texto ficar mais visível */
+            z-index: -1; /* Coloca a imagem atrás do conteúdo */
+        }
+
+        .auth-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para o formulário */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative; /* Para garantir que fique acima do background */
+            z-index: 1;
+        }
+
+        .auth-container h2 {
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-size: 2em;
+        }
+
+        .auth-container .tab-buttons {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .auth-container .tab-button {
+            flex: 1;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #777;
+            border: none;
+            background: none;
+            transition: color 0.3s ease;
+        }
+
+        .auth-container .tab-button.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .auth-container .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .auth-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .auth-container input[type="text"],
+        .auth-container input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            color: var(--text-color-dark);
+        }
+
+        .auth-container input[type="text"]:focus,
+        .auth-container input[type="password"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        .auth-container .btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .auth-container .message {
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .auth-container .message a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-container .message a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-background"></div> <div class="auth-container">
+        <h2>Bem-vindo!</h2>
+
+        <div class="tab-buttons">
+            <button class="tab-button active" id="login-tab">Login</button>
+            <button class="tab-button" id="register-tab">Registrar</button>
+        </div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-username">Usuário</label>
+                <input type="text" id="login-username" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Senha</label>
+                <input type="password" id="login-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+
+        <form id="register-form" style="display: none;">
+            <div class="form-group">
+                <label for="register-username">Usuário</label>
+                <input type="text" id="register-username" required>
+            </div>
+            <div class="form-group">
+                <label for="register-password">Senha</label>
+                <input type="password" id="register-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+
+        <p class="message" id="auth-message"></p>
+    </div>
+
+    <script src="auth.js"></script>
+
+</html>
